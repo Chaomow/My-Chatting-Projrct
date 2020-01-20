@@ -1,0 +1,83 @@
+.themeColor {
+  background-color: #87cefa;
+}
+
+.myHeader {
+  height: 50px;
+  text-align: right;
+  color: #fff;
+}
+.myTitle {
+  display: inline-block;
+  font-size: 20px;
+  margin: 0px 5px;
+}
+
+.headerList {
+  display: inline-block;
+  font-size: 25px;
+  margin: 0px 5px;
+}
+
+.mySider {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: calc(100vh - 100px);
+}
+
+.myContent {
+  height: calc(100vh - 100px);
+  background-color: white;
+}
+
+.myFooter {
+  height: 50px;
+  text-align: center;
+  color: #fff;
+}
+
+.UserInput {
+  height: 100px !important;
+  width: calc(100% - 80px);
+  resize: none;
+}
+
+.UserButton {
+  height: 100px;
+  width: 80px;
+}
+
+.chatField {
+  margin: 10px;
+  text-align: left;
+}
+
+.chatField div:first-child {
+  margin: 0px 5px;
+  font-size: larger;
+  font-weight: bold;
+}
+
+.chatField div:nth-child(2) {
+  padding: 10px;
+  border: 1px lightgray solid;
+  border-radius: 10px;
+  max-width: 40%;
+  min-width: 5%;
+  text-align: center;
+  display: inline-block;
+  box-shadow: 2px 2px 2px 2px lightgray;
+}
+
+.chatField div:nth-child(3) {
+  margin: 0px 5px;
+  vertical-align: bottom;
+}
+
+.fromMe {
+  text-align: right;
+}
+
+.fromMe div:nth-child(2) {
+  background-color: lightgreen;
+}

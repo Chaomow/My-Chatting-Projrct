@@ -1,0 +1,7 @@
+.register {
+  width: 400px;
+  margin: 0 auto;
+}
+.register .ant-btn {
+  margin-right: 15px;
+}
