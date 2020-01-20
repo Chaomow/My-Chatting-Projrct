@@ -54,22 +54,18 @@ class LoginForm extends React.Component {
         // onSubmit={this.onSubmit}
       >
         <Form.Item label="E-mail">
-          {form.getFieldDecorator('email', {
+          {/* {form.getFieldDecorator('email', {
             rules: [{ required: true, message: 'Please input your email!' }],
-          })(
-            <Input
-            // onChange={this.onChange.bind(this, 'email')}
-            />,
-          )}
+          })( */}
+          <Input onChange={this.onChange.bind(this, 'email')} />
+          {/* )} */}
         </Form.Item>
         <Form.Item label="password">
-          {form.getFieldDecorator('password', {
+          {/* {form.getFieldDecorator('password', {
             rules: [{ required: true, message: 'Please input your password!' }],
-          })(
-            <Input.Password
-            // onChange={this.onChange.bind(this, 'password')}
-            />,
-          )}
+          })( */}
+          <Input.Password onChange={this.onChange.bind(this, 'password')} />,
+          {/* )} */}
         </Form.Item>
         <Button
           type="primary"
