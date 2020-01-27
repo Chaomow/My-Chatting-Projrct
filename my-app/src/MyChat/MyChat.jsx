@@ -5,6 +5,7 @@ import MessageRecord from './MessageRecord'
 import UserInput from './UserInput'
 import HeaderBar from './HeaderBar'
 import { Layout, Result, Icon } from 'antd'
+import { animateScroll } from 'react-scroll'
 
 const { Header, Footer, Sider } = Layout
 
@@ -14,29 +15,37 @@ class MyChat extends React.Component {
     visible: false,
   }
 
+  componentDidMount() {
+    setInterval(() => {
+      this.scrollToBottom()
+      if (this.state.visible) this.whoImTalking(this.state.whoITalk)
+    }, 500)
+  }
+  componentDidUpdate() {
+    this.scrollToBottom()
+  }
+  scrollToBottom() {
+    animateScroll.scrollToBottom({
+      containerId: 'ContainerElementID',
+    })
+  }
+
   whoImTalking = talker => {
-    const list = []
     ConnectTo.findMessageByEmail(
       this.props.myData.data.email,
       talker.email,
     ).then(response => {
       response.data.forEach(element => {
-        list.push(element)
+        console.log()
       })
-    })
-    ConnectTo.findMessageByEmail(
-      talker.email,
-      this.props.myData.data.email,
-    ).then(response => {
-      response.data.forEach(element => {
-        list.push(element)
+      this.setState({
+        ...this.state,
+        whoITalk: talker,
+        visible: true,
+        messageList: response.data.sort((a, b) => {
+          return Date.parse(a.time) - Date.parse(b.time)
+        }),
       })
-    })
-    this.setState({
-      ...this.state,
-      // whoITalk: talker,
-      visible: true,
-      messageList: list,
     })
   }
 
@@ -46,12 +55,9 @@ class MyChat extends React.Component {
         <MessageRecord
           myData={this.props.myData}
           messageList={this.state.messageList}
-          // whoITalk={this.state.whoITalk}
+          whoITalk={this.state.whoITalk}
         />
-        <UserInput
-          myData={this.props.myData}
-          // whoITalk={this.state.whoITalk}
-        />
+        <UserInput myData={this.props.myData} whoITalk={this.state.whoITalk} />
       </Layout>
     ) : (
       <Layout className="myContent">

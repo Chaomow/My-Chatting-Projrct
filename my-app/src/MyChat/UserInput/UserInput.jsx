@@ -19,6 +19,7 @@ class UserInput extends React.Component {
 
   onPressEnter = event => {
     event.preventDefault()
+
     const userInput = {
       fromEmail: this.props.myData.data.email,
       toEmail: this.props.whoITalk.email,

@@ -39,11 +39,23 @@ MessageRoutes.route("/findMessageByEmail/:fromEmail/:toEmail").get(function(
   res
 ) {
   let { fromEmail, toEmail } = req.params;
+  let allMessage = [];
   Message.find({ ["fromEmail"]: fromEmail, ["toEmail"]: toEmail }, function(
     err,
     messages
   ) {
-    res.json(messages);
+    messages.forEach(element => {
+      allMessage.push(element);
+    });
+    Message.find({ ["fromEmail"]: toEmail, ["toEmail"]: fromEmail }, function(
+      err,
+      messages
+    ) {
+      messages.forEach(element => {
+        allMessage.push(element);
+      });
+      res.json(allMessage);
+    });
   });
 });
 

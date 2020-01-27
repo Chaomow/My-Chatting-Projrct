@@ -40,35 +40,47 @@ class Register extends React.Component {
 
   onSubmit = event => {
     event.preventDefault()
-
-    const userData = {
-      online: true,
-      email: this.state.data.email,
-      password: this.state.data.password,
-      name: this.state.data.name,
-      gender: this.state.data.gender,
-      // birth: this.state.data.birth,
-      prefixSelector: this.state.data.prefixSelector,
-      phoneNumber: this.state.data.phoneNumber,
-    }
-    if (!!this.props.myData.myLogin) {
-      //update
-      ConnectTo.UpdateUser(this.state.data.email, userData)
-      this.props.LoginState(true, userData)
-      this.props.offUpdateModal()
-      message.success('Your infomation are updated successfully!')
+    if (
+      !(
+        !!this.state.data.email &&
+        !!this.state.data.password &&
+        !!this.state.data.name &&
+        !!this.state.data.gender &&
+        !!this.state.data.prefixSelector &&
+        !!this.state.data.phoneNumber
+      )
+    ) {
+      message.error('Oops! Something is missing. Check it again!')
     } else {
-      //add
-      ConnectTo.FindByEmail(this.state.data.email).then(response => {
-        if (!!response.data) {
-          message.error("You can't use this email. Try again!")
-        } else {
-          ConnectTo.AddAnUser(userData)
-          this.onClear()
-          this.props.LoginState(true, userData)
-          message.success("You've done successfully!")
-        }
-      })
+      const userData = {
+        online: true,
+        email: this.state.data.email,
+        password: this.state.data.password,
+        name: this.state.data.name,
+        gender: this.state.data.gender,
+        // birth: this.state.data.birth,
+        prefixSelector: this.state.data.prefixSelector,
+        phoneNumber: this.state.data.phoneNumber,
+      }
+      if (!!this.props.myData.myLogin) {
+        //update
+        ConnectTo.UpdateUser(this.state.data.email, userData)
+        this.props.LoginState(true, userData)
+        this.props.offUpdateModal()
+        message.success('Your infomation are updated successfully!')
+      } else {
+        //add
+        ConnectTo.FindByEmail(this.state.data.email).then(response => {
+          if (!!response.data) {
+            message.error("You can't use this email. Try again!")
+          } else {
+            ConnectTo.AddAnUser(userData)
+            this.onClear()
+            this.props.LoginState(true, userData)
+            message.success("You've done successfully!")
+          }
+        })
+      }
     }
   }
 
