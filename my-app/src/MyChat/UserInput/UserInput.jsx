@@ -34,6 +34,7 @@ class UserInput extends React.Component {
         myWord: '',
       },
     })
+    setTimeout(this.props.whoImTalking(this.props.whoITalk), 500)
   }
 
   render() {

@@ -1,7 +1,7 @@
 import React from 'react'
 import AddFriend from '../AddFriend'
 import ConnectTo from '../../ConnectTo'
-import { Menu, Badge } from 'antd'
+import { Menu /*, Badge*/ } from 'antd'
 
 class MessagerList extends React.Component {
   state = {
@@ -41,10 +41,10 @@ class MessagerList extends React.Component {
               onClick={this.onClick.bind(this, user.name, user.email)}
             >
               {user.name}
-              <Badge
+              {/* <Badge
                 count={user.read}
                 style={{ position: 'absolute', top: '-15px', right: '-30px' }}
-              />
+              /> */}
             </Menu.Item>
           )
         })
@@ -58,6 +58,12 @@ class MessagerList extends React.Component {
       <div>
         <AddFriend myData={myData} />
         <Menu onClick={this.handleClick} mode="inline">
+          <Menu.Item
+            key="Public"
+            onClick={this.onClick.bind(this, 'PublicRoom', 'PublicRoom')}
+          >
+            Public Room
+          </Menu.Item>
           {namesList}
         </Menu>
       </div>

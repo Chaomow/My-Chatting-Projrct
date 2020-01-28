@@ -5,29 +5,12 @@ import MessageRecord from './MessageRecord'
 import UserInput from './UserInput'
 import HeaderBar from './HeaderBar'
 import { Layout, Result, Icon } from 'antd'
-import { animateScroll } from 'react-scroll'
 
 const { Header, Footer, Sider } = Layout
-
 class MyChat extends React.Component {
   state = {
     whoITalk: {},
     visible: false,
-  }
-
-  componentDidMount() {
-    setInterval(() => {
-      this.scrollToBottom()
-      if (this.state.visible) this.whoImTalking(this.state.whoITalk)
-    }, 500)
-  }
-  componentDidUpdate() {
-    this.scrollToBottom()
-  }
-  scrollToBottom() {
-    animateScroll.scrollToBottom({
-      containerId: 'ContainerElementID',
-    })
   }
 
   whoImTalking = talker => {
@@ -35,9 +18,6 @@ class MyChat extends React.Component {
       this.props.myData.data.email,
       talker.email,
     ).then(response => {
-      response.data.forEach(element => {
-        console.log()
-      })
       this.setState({
         ...this.state,
         whoITalk: talker,
@@ -56,8 +36,13 @@ class MyChat extends React.Component {
           myData={this.props.myData}
           messageList={this.state.messageList}
           whoITalk={this.state.whoITalk}
+          whoImTalking={this.whoImTalking}
         />
-        <UserInput myData={this.props.myData} whoITalk={this.state.whoITalk} />
+        <UserInput
+          myData={this.props.myData}
+          whoITalk={this.state.whoITalk}
+          whoImTalking={this.whoImTalking}
+        />
       </Layout>
     ) : (
       <Layout className="myContent">

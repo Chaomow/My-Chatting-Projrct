@@ -44,13 +44,21 @@ const ConnectTo = {
       })
   },
   findMessageByEmail: (fromEmail, toEmail) => {
-    return axios
-      .get(
-        `http://localhost:4000/message/findMessageByEmail/${fromEmail}/${toEmail}`,
-      )
-      .catch(function(error) {
-        console.log(error)
-      })
+    if (toEmail === 'PublicRoom') {
+      return axios
+        .get(`http://localhost:4000/message/findPublicMessage`)
+        .catch(function(error) {
+          console.log(error)
+        })
+    } else {
+      return axios
+        .get(
+          `http://localhost:4000/message/findMessageByEmail/${fromEmail}/${toEmail}`,
+        )
+        .catch(function(error) {
+          console.log(error)
+        })
+    }
   },
   LoginState: (email, state) => {
     return axios

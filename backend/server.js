@@ -59,6 +59,13 @@ MessageRoutes.route("/findMessageByEmail/:fromEmail/:toEmail").get(function(
   });
 });
 
+//FindPublicMessages
+MessageRoutes.route("/findPublicMessage").get(function(req, res) {
+  Message.find({ ["toEmail"]: "PublicRoom" }, function(err, messages) {
+    res.json(messages);
+  });
+});
+
 app.use("/message", MessageRoutes);
 
 //---------------------------------message End-----------------------------------------
